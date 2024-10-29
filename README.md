@@ -11,12 +11,14 @@ Though cobaya is a general purpose statistical framework, it includes interfaces
 
 The interfaces to most cosmological likelihoods are agnostic as to which theory code is used to compute the observables, which facilitates comparison between those codes. Those interfaces are also parameter-agnostic, so using your own modified versions of theory codes and likelihoods requires no additional editing of cobaya’s source.
 
+The original web page [Cobaya Website](https://cobaya.readthedocs.io/en/latest/index.html) that is cited in this document.
+
 Preparation 
 ===================
 cobaya is a python library that need
 
 1. Ubuntu
-- Install GNU Compiler
+- Install Compiler
 ```Linux
 sudo apt update && sudo apt upgrade
 sudo apt install nano
@@ -43,7 +45,7 @@ sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 ```Linux
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-- Install GNU Compiler
+- Install Compiler
 ```Linux
 brew install wget
 brew install git
@@ -76,7 +78,7 @@ pip3 install cobaya
 cobaya-install cosmo -p /path/to/packages
 cobaya-install planck_2018_highl_plik.TTTEEE
 ```
-You need to put `code` to `/path/to/packages` directory.
+You need to place theory codes and likelihoods in the `/path/to/packages` directory, but you can also modified this path to suit on your own machine.
 
 3. Setting Cosmology Run
 Creating the input for a realistic cosmological case is quite a bit of work. But to make it simpler, cobaya has created an automatic input generator, that you can run from the shell.
