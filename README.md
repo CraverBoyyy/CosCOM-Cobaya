@@ -1,4 +1,3 @@
-
 Cobaya, a code for Bayesian analysis in Cosmology: Installation and Using Guide
 ===================
 Cobaya (code for bayesian analysis, and Spanish for Guinea Pig) is a framework for sampling and statistical modelling: it allows you to explore an arbitrary prior or posterior using a range of Monte Carlo samplers (including the advanced MCMC sampler from CosmoMC, and the advanced nested sampler PolyChord). The results of the sampling can be analysed with GetDist. It supports MPI parallelization (and very soon HPC containerization with Docker/Shifter and Singularity).
@@ -90,32 +89,23 @@ python3 -m pip install PySide6
 ```Linux
 cobaya-cosmo-generator
 ```
-
+<p align="center">
+<img src="https://github.com/user-attachments/assets/400ca718-cfd2-405f-a69a-8405e64a2e89"  width="960px" height="516px">
+</p>
 4. Sample Run
 
  ```Python
-#!/bin/bash
 
-#SBATCH -J CosmoMC      # Job name
-#SBATCH -n 10           # Number of tasks
-
-module purge
-module load hwloc
-module load intel/19.0.5.281
-module load openmpi3/4.0.2
-module load CosmoMC
-mpirun <path to .ini file>
 ```
+
+
+5. Cobaya Parallel Run 
 For running on the pollux node, if model has been modified, a symbolic link for `$CLIK_PATH` must be created in step 1. Following this, compilation is required, and it is essential to load the necessary modules as follows.
 ```Linux
 module purge
 module load hwloc
 module load intel/19.0.5.281
 module load openmpi3/4.0.2
-export PLANCKLIKE=cliklike
-export CLIK_DATA=/data3/opt/ohpc/pub/apps/CosmoMC-Oct19/plc_3.1/share/clik
-export CLIK_PATH=/data3/opt/ohpc/pub/apps/CosmoMC-Oct19/plc_3.1
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CLIK_PATH/lib
 ```
 ```Linux
 #!/bin/bash
@@ -129,28 +119,24 @@ module purge
 module load hwloc
 module load intel/19.0.5.281
 module load openmpi3/4.0.2
-export PLANCKLIKE=cliklike
-export CLIK_DATA=/data3/opt/ohpc/pub/apps/CosmoMC-Oct19/plc_3.1/share/clik
-export CLIK_PATH=/data3/opt/ohpc/pub/apps/CosmoMC-Oct19/plc_3.1
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CLIK_PATH/lib
+
 mpirun ./cosmomc <path to .ini file>
 ```
+
 For running on the castor node, it is necessary to install the Planck likelihood and recompile using the GNU Compiler. The important modules should be loaded as follows.
 ```Linux
 module purge
-module load gnu8
 module load hwloc
 module load openmpi3
 ```
 ```Linux
 #!/bin/bash
 
-#SBATCH -J CosmoMC      # Job name
+#SBATCH -J Cobaya      # Job name
 #SBATCH -p chalawan_cpu # Partition
 #SBATCH -n 10           # Number of task
 
 module purge
-module load gnu8
 module load hwloc
 module load openmpi3
 source data/clik_14.0/bin/clik_profile.sh
@@ -160,7 +146,6 @@ mpirun ./cosmomc <path to .ini file>
 
 Tutorial for basic Slurm Commands: [http://chalawan.narit.or.th/home/index.php/using-pollux/using-slurm/](http://chalawan.narit.or.th/home/index.php/using-pollux/using-slurm/) 
 
-5. Cobaya Parallel Run 
 
 6. Output
 
