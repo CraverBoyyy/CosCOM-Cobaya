@@ -95,69 +95,123 @@ cobaya-cosmo-generator
 4. Sample Run
 
  ```Python
+info = {'likelihood': {'planck_2018_highl_plik.TTTEEE': None,
+                'planck_2018_lensing.clik': None,
+                'planck_2018_lowl.EE': None,
+                'planck_2018_lowl.TT': None},
+ 'params': {'A': {'derived': 'lambda As: 1e9*As',
+                  'latex': '10^9 A_\\mathrm{s}'},
+            'As': {'latex': 'A_\\mathrm{s}',
+                   'value': 'lambda logA: 1e-10*np.exp(logA)'},
+            'DHBBN': {'derived': 'lambda DH: 10**5*DH',
+                      'latex': '10^5 \\mathrm{D}/\\mathrm{H}'},
+            'H0': {'latex': 'H_0', 'max': 100, 'min': 20},
+            'YHe': {'latex': 'Y_\\mathrm{P}'},
+            'Y_p': {'latex': 'Y_P^\\mathrm{BBN}'},
+            'age': {'latex': '{\\rm{Age}}/\\mathrm{Gyr}'},
+            'clamp': {'derived': 'lambda As, tau: 1e9*As*np.exp(-2*tau)',
+                      'latex': '10^9 A_\\mathrm{s} e^{-2\\tau}'},
+            'cosmomc_theta': {'derived': False,
+                              'value': 'lambda theta_MC_100: '
+                                       '1.e-2*theta_MC_100'},
+            'logA': {'drop': True,
+                     'latex': '\\log(10^{10} A_\\mathrm{s})',
+                     'prior': {'max': 3.91, 'min': 1.61},
+                     'proposal': 0.001,
+                     'ref': {'dist': 'norm', 'loc': 3.05, 'scale': 0.001}},
+            'mnu': 0.06,
+            'ns': {'latex': 'n_\\mathrm{s}',
+                   'prior': {'max': 1.2, 'min': 0.8},
+                   'proposal': 0.002,
+                   'ref': {'dist': 'norm', 'loc': 0.965, 'scale': 0.004}},
+            'ombh2': {'latex': '\\Omega_\\mathrm{b} h^2',
+                      'prior': {'max': 0.1, 'min': 0.005},
+                      'proposal': 0.0001,
+                      'ref': {'dist': 'norm', 'loc': 0.0224, 'scale': 0.0001}},
+            'omch2': {'latex': '\\Omega_\\mathrm{c} h^2',
+                      'prior': {'max': 0.99, 'min': 0.001},
+                      'proposal': 0.0005,
+                      'ref': {'dist': 'norm', 'loc': 0.12, 'scale': 0.001}},
+            'omega_de': {'latex': '\\Omega_\\Lambda'},
+            'omegam': {'latex': '\\Omega_\\mathrm{m}'},
+            'omegamh2': {'derived': 'lambda omegam, H0: omegam*(H0/100)**2',
+                         'latex': '\\Omega_\\mathrm{m} h^2'},
+            'rdrag': {'latex': 'r_\\mathrm{drag}'},
+            's8h5': {'derived': 'lambda sigma8, H0: sigma8*(H0*1e-2)**(-0.5)',
+                     'latex': '\\sigma_8/h^{0.5}'},
+            's8omegamp25': {'derived': 'lambda sigma8, omegam: '
+                                       'sigma8*omegam**0.25',
+                            'latex': '\\sigma_8 \\Omega_\\mathrm{m}^{0.25}'},
+            's8omegamp5': {'derived': 'lambda sigma8, omegam: '
+                                      'sigma8*omegam**0.5',
+                           'latex': '\\sigma_8 \\Omega_\\mathrm{m}^{0.5}'},
+            'sigma8': {'latex': '\\sigma_8'},
+            'tau': {'latex': '\\tau_\\mathrm{reio}',
+                    'prior': {'max': 0.8, 'min': 0.01},
+                    'proposal': 0.003,
+                    'ref': {'dist': 'norm', 'loc': 0.055, 'scale': 0.006}},
+            'theta_MC_100': {'drop': True,
+                             'latex': '100\\theta_\\mathrm{MC}',
+                             'prior': {'max': 10, 'min': 0.5},
+                             'proposal': 0.0002,
+                             'ref': {'dist': 'norm',
+                                     'loc': 1.04109,
+                                     'scale': 0.0004},
+                             'renames': 'theta'},
+            'zrei': {'latex': 'z_\\mathrm{re}'}},
+ 'sampler': {'mcmc': {'Rminus1_cl_stop': 0.2,
+                      'Rminus1_stop': 0.01,
+                      'covmat': 'auto',
+                      'drag': True,
+                      'oversample_power': 0.4,
+                      'proposal_scale': 1.9}},
+ 'theory': {'camb': {'extra_args': {'bbn_predictor': 'PArthENoPE_880.2_standard.dat',
+                                    'halofit_version': 'mead',
+                                    'lens_potential_accuracy': 1,
+                                    'nnu': 3.044,
+                                    'num_massive_neutrinos': 1,
+                                    'theta_H0_range': [20, 100]}}},
+       'output' : 'chains/test1/test1'
+}
+from cobaya.run import run
 
+updated_info, sampler = run(info)
 ```
-
+Remark: output directory must be specify in running file. There are main 4 styles of setting for output directories.
+* `output: something` the output will be written into the current folder, and all output file names will start with `something`.
+* `output: somefolder/something` similar to the last case, but writes into the folder `somefolder`, which is created at that point if necessary.
+* `output: somefolder/` writes into the folder `somefolder`, which is created at that point if necessary, with no prefix for the file names.
+* `output: null` will produce no output files whatsoever – the products will be just loaded in memory. Use only when invoking from the Python interpreter.
+* Instead, when calling from a `Python interpreter`, if output has not been specified, it is understood as `output: null`.
 
 5. Cobaya Parallel Run 
-For running on the pollux node, if model has been modified, a symbolic link for `$CLIK_PATH` must be created in step 1. Following this, compilation is required, and it is essential to load the necessary modules as follows.
-```Linux
-module purge
-module load hwloc
-module load intel/19.0.5.281
-module load openmpi3/4.0.2
-```
+Following this, compilation is required, and it is essential to load the necessary modules as follows.
+
 ```Linux
 #!/bin/bash
 
-#SBATCH -J CosmoMC      # Job name
-#SBATCH -n 10           # Number of tasks
-#SBATCH -p chalawan_gpu # Partition
-#SBATCH -w pollux3
+#SBATCH -J Cobaya_2   # Job name
+#SBATCH -N 2          # Total number of nodes requested
+#SBATCH -n 16         # Total number of mpi tasks
 
 module purge
 module load hwloc
 module load intel/19.0.5.281
 module load openmpi3/4.0.2
 
-mpirun ./cosmomc <path to .ini file>
+mpirun -np 16 python3 <model.py>
 ```
 
-For running on the castor node, it is necessary to install the Planck likelihood and recompile using the GNU Compiler. The important modules should be loaded as follows.
-```Linux
-module purge
-module load hwloc
-module load openmpi3
-```
-```Linux
-#!/bin/bash
-
-#SBATCH -J Cobaya      # Job name
-#SBATCH -p chalawan_cpu # Partition
-#SBATCH -n 10           # Number of task
-
-module purge
-module load hwloc
-module load openmpi3
-source data/clik_14.0/bin/clik_profile.sh
-
-mpirun ./cosmomc <path to .ini file>
-```
 
 Tutorial for basic Slurm Commands: [http://chalawan.narit.or.th/home/index.php/using-pollux/using-slurm/](http://chalawan.narit.or.th/home/index.php/using-pollux/using-slurm/) 
 
 
-6. Output
+6. Output Files
 
-* `.txt file` lists each accepted set of parameters for each chain.
-* `.log file` contains some info which may be useful to assess performance.
-* `.data file` contains full computed model information at the independent sample points (power spectra etc).
-* `.chk file` stores the current status that if the processes are terminated they can be restarted again from close to where they left off.
-* `.inputparams file` contains the input values of the parameters and setting.
-* `.likelihood file` lists the names of the likelihoods.
-* `.paramnames file` lists the names and labels of the parameters.
-* `.ranges file` lists the name tags of the parameters, and their upper and lower bounds.
-* `.converge_stat file` contains "R-1" statistic that also used for the stopping criterion when generating chains with MPI.
+* `[prefix].input.yaml` a file with the same content as the input file.
+* `[prefix].updated.yaml` a file containing the input information plus the default values used by each component.
+* `[prefix].[number].txt` one or more sample files, containing one sample per line, with values separated by spaces. The first line specifies the columns.
+* `[prefix].progress` a file monitoring the convergence of the chain, that can be inspected or plotted.
 
 Plotting with GetDist
 ===================
