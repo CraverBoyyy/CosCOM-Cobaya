@@ -76,6 +76,7 @@ pip3 install cobaya
 ```Linux
 cobaya-install cosmo -p /path/to/packages
 cobaya-install planck_2018_highl_plik.TTTEEE
+cobaya-install bicep_keck_2018
 ```
 You need to place theory codes and likelihoods in the `/path/to/packages` directory, but you can also modified this path to suit on your own machine.
 
