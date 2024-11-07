@@ -191,16 +191,31 @@ Following this, compilation is required, and it is essential to load the necessa
 ```Linux
 #!/bin/bash
 
-#SBATCH -J Cobaya_2   # Job name
-#SBATCH -N 2          # Total number of nodes requested
-#SBATCH -n 16         # Total number of mpi tasks
+#SBATCH -J Cobaya   # Job name
+#SBATCH -n 4        # Total number of mpi tasks
 
 module purge
 module load hwloc
 module load intel/19.0.5.281
 module load openmpi3/4.0.2
 
-mpirun -np 16 python3 <model.py>
+mpirun -n 4 python3 <model.py>
+```
+
+```Linux
+#!/bin/bash
+
+#SBATCH -J Cobaya    # Job name
+#SBATCH -N 1         # Total number of nodes requested
+#SBATCH -n 4         # Total number of mpi tasks
+#SBATCH --cpus-per-task=4
+
+module purge
+module load hwloc
+module load intel/19.0.5.281
+module load openmpi3/4.0.2
+
+mpirun -n 4 -c 4 python3 <model.py>
 ```
 
 
