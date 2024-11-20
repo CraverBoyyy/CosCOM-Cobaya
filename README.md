@@ -4,7 +4,7 @@ Cobaya (code for bayesian analysis, and Spanish for Guinea Pig) is a framework f
 
 Its authors are Jesus Torrado and Antony Lewis. Some ideas and pieces of code have been adapted from other codes (e.g CosmoMC by Antony Lewis and contributors, and Monte Python, by J. Lesgourgues and B. Audren).
 
-Cobaya has been conceived from the beginning to be highly and effortlessly extensible: without touching cobaya’s source code, you can define your own priors and likelihoods, create new parameters as functions of other parameters…
+Cobaya has been conceived from the beginning to be highly and effortlessly extensible: without touching cobaya’s source code, you can define your own priors and likelihoods, create new parameters as functions of other parameter.
 
 Though cobaya is a general purpose statistical framework, it includes interfaces to cosmological theory codes (CAMB and CLASS) and likelihoods of cosmological experiments (Planck, Bicep-Keck, SDSS… and more coming soon). Automatic installers are included for all those external modules. You can also use cobaya simply as a wrapper for cosmological models and likelihoods, and integrate it in your own sampler/pipeline.
 
@@ -14,8 +14,7 @@ The original web page [Cobaya Website](https://cobaya.readthedocs.io/en/latest/i
 
 Preparation 
 ===================
-cobaya is a python library that need
-
+First, the computer needs to install essential libraries and compilers.  
 1. Ubuntu
 - Install Compiler
 ```Linux
@@ -25,6 +24,14 @@ sudo apt install wget
 sudo apt install git -y
 sudo apt install python3
 sudo apt install python3-pip
+sudo apt install liblapack-dev
+sudo apt install libcfitsio-dev
+sudo apt install build-essential
+sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
+```
+
+- Install Python's required Librareis
+```Linux
 pip3 install numpy
 pip3 install scipy
 pip3 install matplotlib
@@ -33,10 +40,6 @@ pip3 install astropy
 pip3 install getdist
 pip3 install jupyter
 sudo apt install jupyter
-sudo apt install liblapack-dev
-sudo apt install libcfitsio-dev
-sudo apt install build-essential
-sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 ```
 
 2. MacOS
@@ -44,13 +47,27 @@ sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 ```Linux
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
 - Install Compiler
 ```Linux
 brew install wget
 brew install git
 brew install nano
+brew install lapack
+brew install cfitsio
+brew install open-mpi
+```
+
+MacOS includes a built-in Python compiler within the site-packages libraries,  do not need to install Python via Homebrew. However, if an unresolved bug arise, it may become necessary to install Homebrew's Python at that point.
+
+- Install Homebrew Python 
+```Linux
 brew install python3
 python3 -m pip install --upgrade pip
+```
+
+- Install Python's required Librareis
+```Linux
 pip3 install numpy
 pip3 install scipy
 pip3 install matplotlib
@@ -59,9 +76,6 @@ pip3 install astropy
 pip3 install getdist
 pip3 install jupyter
 brew install jupyter
-brew install lapack
-brew install cfitsio
-brew install open-mpi
 ```
 
 Cobaya
