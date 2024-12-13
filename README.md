@@ -10,7 +10,7 @@ Though cobaya is a general purpose statistical framework, it includes interfaces
 
 The interfaces to most cosmological likelihoods are agnostic as to which theory code is used to compute the observables, which facilitates comparison between those codes. Those interfaces are also parameter-agnostic, so using your own modified versions of theory codes and likelihoods requires no additional editing of cobaya’s source.
 
-The original web page [Cobaya Website](https://cobaya.readthedocs.io/en/latest/index.html) that is cited in this document. \n
+The original web page [Cobaya Website](https://cobaya.readthedocs.io/en/latest/index.html) that is cited in this document. \
 If you have any questions about installation, please feel free to contact me via email: j.pongsapatb@gmail.com
 
 Preparation 
