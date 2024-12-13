@@ -10,7 +10,8 @@ Though cobaya is a general purpose statistical framework, it includes interfaces
 
 The interfaces to most cosmological likelihoods are agnostic as to which theory code is used to compute the observables, which facilitates comparison between those codes. Those interfaces are also parameter-agnostic, so using your own modified versions of theory codes and likelihoods requires no additional editing of cobaya’s source.
 
-The original web page [Cobaya Website](https://cobaya.readthedocs.io/en/latest/index.html) that is cited in this document.
+The original web page [Cobaya Website](https://cobaya.readthedocs.io/en/latest/index.html) that is cited in this document. \n
+If you have any questions about installation, please feel free to contact me via email: j.pongsapatb@gmail.com
 
 Preparation 
 ===================
@@ -22,16 +23,38 @@ sudo apt update && sudo apt upgrade
 sudo apt install nano
 sudo apt install wget
 sudo apt install git -y
-sudo apt install python3
-sudo apt install python3-pip
 sudo apt install liblapack-dev
 sudo apt install libcfitsio-dev
 sudo apt install build-essential
 sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 ```
 
-- Install Python's required Librareis
+- Install Python and Librareis
+  We recommd you to install Miniconda for better manage Python evironment.
 ```Linux
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+source ~/miniconda3/bin/activate
+```
+Then install Python and Libraries.
+```Linux
+python3 -m pip install pip
+pip3 install numpy
+pip3 install scipy
+pip3 install matplotlib
+pip3 install cython
+pip3 install astropy
+pip3 install getdist
+pip3 install jupyter
+conda install jupyter
+```
+
+In the other way, you can also install Python via Site-Package.
+```Linux
+sudo apt install python3
+sudo apt install python3-pip
 pip3 install numpy
 pip3 install scipy
 pip3 install matplotlib
@@ -77,6 +100,36 @@ pip3 install getdist
 pip3 install jupyter
 brew install jupyter
 ```
+For better handle Python evironment, we recommd you to install Miniconda.
+ - For Apple Silicon chip
+```Linux
+mkdir -p ~/miniconda3
+curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+source ~/miniconda3/bin/activate
+```
+- For Intel chip
+```Linux
+mkdir -p ~/miniconda3
+curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+source ~/miniconda3/bin/activate
+```
+Then install Python and Libraries.
+```Linux
+python3 -m pip install pip
+pip3 install numpy
+pip3 install scipy
+pip3 install matplotlib
+pip3 install cython
+pip3 install astropy
+pip3 install getdist
+pip3 install jupyter
+conda install jupyter
+```
+  
 
 Cobaya
 ===================
