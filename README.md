@@ -241,9 +241,28 @@ info = {'likelihood': {'planck_2018_highl_plik.TTTEEE': None,
                                     'theta_H0_range': [20, 100]}}},
        'output' : 'chains/test1/test1'
 }
-from cobaya.run import run
+```
+```Linux
+from mpi4py import MPI
 
-updated_info, sampler = run(info)
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+
+from cobaya import run
+from cobaya.log import LoggedError
+
+success = False
+try:
+    upd_info, mcmc = run(info)
+    success = True
+except LoggedError as err:
+    pass
+
+# Did it work? (e.g. did not get stuck)
+success = all(comm.allgather(success))
+
+if not success and rank == 0:
+    print("Sampling failed!")
 ```
 Remark: output directory must be specify in running file. There are main 4 styles of setting for output directories.
 * `output: something` the output will be written into the current folder, and all output file names will start with `something`.
