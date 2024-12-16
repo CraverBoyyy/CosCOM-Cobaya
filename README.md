@@ -141,7 +141,7 @@ pip3 install cobaya
 
 2. Cosmological theory codes and likelihoods
 ```Linux
-cobaya-install cosmo -p /path/to/packages
+cobaya-install cosmo -p /path/to/your/directory
 cobaya-install planck_2018_highl_plik.TTTEEE
 cobaya-install bicep_keck_2018
 ```
