@@ -242,7 +242,7 @@ info = {'likelihood': {'planck_2018_highl_plik.TTTEEE': None,
        'output' : 'chains/test1/test1'
 }
 ```
-```Linux
+```Python
 from mpi4py import MPI
 
 comm = MPI.COMM_WORLD
