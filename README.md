@@ -139,7 +139,7 @@ Cobaya
 pip3 install cobaya
 ```
 
-2. Cosmological theory codes and likelihoods
+2. Cosmological theory codes and likelihoods. You need to set `/path/to/your/directory` to your folder such as `./`.
 ```Linux
 cobaya-install cosmo -p /path/to/your/directory
 cobaya-install planck_2018_highl_plik.TTTEEE
