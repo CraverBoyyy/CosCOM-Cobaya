@@ -139,13 +139,14 @@ Cobaya
 pip3 install cobaya
 ```
 
-2. Cosmological theory codes and likelihoods. You need to set `/path/to/your/directory` to your folder such as `./`.
+2. Cosmological theory codes and likelihoods. ⚠️ **You need to replace `<path/to/your/directory>` by your istalled directory path such as `/home/if01/`**
 ```Linux
 cobaya-install cosmo -p /path/to/your/directory
 cobaya-install planck_2018_highl_plik.TTTEEE
 cobaya-install bicep_keck_2018
 ```
-You need to place theory codes and likelihoods in the `/path/to/packages` directory, but you can also modified this path to suit on your own machine.
+You need to place theory codes and likelihoods in the `/path/to/packages` directory, but you can also modified this path to suit on your own machine.\
+If the installation is successful, `code` and `data` directories will be shown on your pc.
 
 3. Setting Cosmology Run
 Creating the input for a realistic cosmological case is quite a bit of work. But to make it simpler, cobaya has created an automatic input generator, that you can run from the shell.
